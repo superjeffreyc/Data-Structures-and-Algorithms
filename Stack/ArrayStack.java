@@ -5,7 +5,6 @@
 public class ArrayStack {
 
 	int			stackPointer	= 0;
-	int			basePointer		= 0;
 	int			size;
 	Object[]	array;
 
