@@ -1,7 +1,7 @@
 #ifndef HEAPSORT_H
 #define HEAPSORT_H
 
-class Sort {
+class Heapsort {
 
 private:
 	void heapify(int * a, int size);
@@ -10,7 +10,7 @@ private:
 	int getLeft(int i);
 
 public:
-	int *  heapsort(int * a, int size);
+	int * heapsort(int * a, int size);
 
 };
 

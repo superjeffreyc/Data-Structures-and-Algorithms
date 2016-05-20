@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int * Sort::heapsort(int * a, int size) {
+int * Heapsort::heapsort(int * a, int size) {
 
 	if (size == 1) return a;
 
@@ -18,13 +18,13 @@ int * Sort::heapsort(int * a, int size) {
 	return a;
 }
 
-void Sort::heapify(int * a, int size) {
+void Heapsort::heapify(int * a, int size) {
 	for (int i = (size - 2) / 2; i >= 0; i--) {
 		siftdown(a, size, i);
 	}
 }
 
-int Sort::siftdown(int * a, int size, int i) {
+int Heapsort::siftdown(int * a, int size, int i) {
 	if (i < 0 || i >= size) return i;
 
 	while (!isLeaf(i, size)) {
@@ -42,12 +42,12 @@ int Sort::siftdown(int * a, int size, int i) {
 	return i;
 }
 
-bool Sort::isLeaf(int i, int size) {
+bool Heapsort::isLeaf(int i, int size) {
 	if (((2 * i) + 2) < size || ((2 * i) + 1) < size) return false;
 	return true;
 }
 
-int Sort::getLeft(int i) {
+int Heapsort::getLeft(int i) {
 	return ((2 * i) + 1);
 }
 
