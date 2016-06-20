@@ -3,13 +3,16 @@
 
 using namespace std;
 
+/* 
+ * Main function of quicksort that partitions the array into two halves and recursively sorts each half of the array
+ */
 int * Quicksort::quicksort(int * arr, int low, int high) {
 
 	if (low >= high) return arr;
 
-	int pivot = partition(arr, low, high);
-	quicksort(arr, low, pivot - 1);
-	quicksort(arr, pivot + 1, high);
+	int pivot = partition(arr, low, high);	// The pivot is now in the correct place
+	quicksort(arr, low, pivot - 1);		// Sort the left half
+	quicksort(arr, pivot + 1, high);	// Sort the right half
 	return arr;
 }
 
@@ -18,9 +21,13 @@ int * Quicksort::quicksort(int * arr, int low, int high) {
  */
 int Quicksort::partition(int * arr, int low, int high) {
 	int pivot = findPivot(arr, low, high);
-	swap(arr[pivot], arr[high]);
+	swap(arr[pivot], arr[high]);		// Temporarily move the pivot to the last element
 
-	int i, marker = low;
+	int i;			// Current index
+	int marker = low;	// The marker is used to indicate the next index to put an element that is less than the pivot
+	
+	// If the current element is less than the pivot, swap with the marker and increment BOTH the index and marker. 
+	// Otherwise, only increment the index
 	for (i = low; i < high; i++) {
 		if (arr[i] < arr[high]) {
 			if (i != marker) swap(arr[i], arr[marker]);
