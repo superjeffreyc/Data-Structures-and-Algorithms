@@ -9,8 +9,9 @@
  *          / \ / \
  *         4  5 6  7
  *
- * Left Index: 2i + 1
- * Right Index: 2i + 2
+ * Given a parent node at index i:
+ * Left Child Index: 2i + 1
+ * Right Child Index: 2i + 2
  *
  */
 
@@ -19,7 +20,10 @@
 
 using namespace std;
 
-// Sorts an array by turning it into a max-heap and repeatedly swapping the root with the last element of the effective array 
+/*
+ * Sorts an array by first turning it into a max-heap. Then, repeatedly swap the maximum value (root) with the last element 
+ * of the effective array and then decrement the effective size. Repeat until the array is fully sorted
+ */
 int * Heapsort::heapsort(int * array, int size) {
 
 	if (size == 1) return array;
@@ -74,7 +78,7 @@ int Heapsort::siftdown(int * array, int size, int parentIndex) {
 		parentIndex = maxChildIndex;	// Keep the same parent that was just sifted down
 	}
 
-	return i;
+	return parentIndex;
 }
 
 // Checks if the node has any children
