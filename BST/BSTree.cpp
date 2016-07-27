@@ -73,3 +73,82 @@ BSTree::Node::Node(int val) {
 	data = val;
 	left = right = parent = NULL;
 }
+
+void BSTree::removeLeaf(Node * node){
+	if (node->parent){
+		if (node->parent->left == node) node->parent->left = NULL;
+		else node->parent->right = NULL;
+	} else {
+		root = NULL;
+	}
+	
+	delete node;
+}
+
+void BSTree::shortCircuit(Node * node){
+	if (root == node){
+		if (node->left) {
+			node->left->parent = NULL;
+			root = node->left;			
+		}
+		else if (node->right) {
+			node->right->parent = NULL;
+			root = node->right;
+		}
+	} else if (node->parent->left == node){
+		if (node->left) {
+			node->parent->left = node->left;
+			node->left->parent = node->parent;
+		}
+		else {
+			node->parent->left = node->right;
+			node->right->parent = node->parent;
+		}
+	} else {
+		if (node->left) {
+			node->parent->right = node->left;
+			node->left->parent = node->parent;
+		}
+		else {
+			node->parent->right = node->right;
+			node->right->parent = node->parent;
+		}
+	}
+
+	delete node;
+}
+
+void BSTree::promotion(Node * node){
+	Node * temp = findMax(node->right);
+	node->data = temp->data;
+	if (temp->left == NULL && temp->right == NULL) removeLeaf(temp);
+	else shortCircuit(temp);
+}
+
+BSTree::Node * BSTree::findMin(Node * node){
+	if (node->right) return findMin(node->right);
+	return node;
+}
+
+BSTree::Node * BSTree::findMax(Node * node){
+	if (node->left) return findMax(node->left);	
+	return node;
+}
+
+bool BSTree::remove(int num){
+	if (!find(num)) return false;
+	
+	Node * node = getNode(num);
+	
+	if (node->left == NULL && node->right == NULL){
+		removeLeaf(node);
+	}
+	else if (node->left == NULL || node->right == NULL){
+		shortCircuit(node);
+	}
+	else {
+		promotion(node);
+	}
+		
+	return true;
+}

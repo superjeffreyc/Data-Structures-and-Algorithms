@@ -13,6 +13,12 @@ private:
 		Node * parent;
 		Node(int val);
 	};
+	
+	void removeLeaf(Node *);
+	void shortCircuit(Node *);
+	void promotion(Node *);
+	Node * findMin(Node *);
+	Node * findMax(Node *);
 
 public:
 	BSTree();
@@ -20,6 +26,7 @@ public:
 	bool insert(int val);
 	bool find(int val);
 	Node * root;
+	bool remove(int);
 
 };
 
