@@ -152,3 +152,33 @@ bool BSTree::remove(int num){
 		
 	return true;
 }
+
+BSTree::BSTree(const BSTree &old_tree){
+	if (old_tree.root) deepCopy(old_tree.root);
+}
+
+void BSTree::deepCopy(Node * node){
+	insert(node->data);
+	if (node->left) deepCopy(node->left);
+	if (node->right) deepCopy(node->right);
+}
+
+BSTree::~BSTree(){
+	if (root != NULL) deleteNode(root);
+}
+
+void BSTree::deleteNode(Node * node){
+	if (node->left) deleteNode(node->left);
+	if (node->right) deleteNode(node->right);
+	delete node;
+}
+
+void BSTree::sortedArray(vector<int> &list){
+	if (root != NULL) traverseSort(root, list);
+}
+
+void BSTree::traverseSort(Node * node, vector<int> &list){
+	if (node->left) traverseSort(node->left, list);
+	list.push_back(node->data);
+	if (node->right) traverseSort(node->right, list);
+}

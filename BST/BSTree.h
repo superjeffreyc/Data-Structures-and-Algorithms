@@ -19,6 +19,9 @@ private:
 	void promotion(Node *);
 	Node * findMin(Node *);
 	Node * findMax(Node *);
+	void deleteNode(Node *);
+    void deepCopy(Node *);
+    void traverseSort(Node * node, std::vector<int> &list);
 
 public:
 	BSTree();
@@ -27,6 +30,9 @@ public:
 	bool find(int val);
 	Node * root;
 	bool remove(int);
+	BSTree(const BSTree &old_tree);
+	~BSTree();
+	void sortedArray(std::vector<int> &list);
 
 };
 
